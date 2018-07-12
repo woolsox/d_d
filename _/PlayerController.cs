@@ -1,23 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
-    public float speed;
-    public float jumpForce;
 
-    float moveInput;
-    bool facingRight = true;
+    public float speed;             //Floating point variable to store the player's movement speed.
+    public float jumpForce;         //Floating point variable to store the players jumping power.
 
-    bool isGrounded;
-    public Transform groundCheck;
-    public float checkRadius;
-    public LayerMask whatIsGround;
+    float moveInput;                //Either -1 or 0 to determine if the player pressed the L/R arrow keys.
+    bool facingRight = true;        //Sets sprites inital appearance.
 
-    Rigidbody2D rb;
+    bool isGrounded;                //Boolean to deteremine if the player is, or is not on the ground.
+    public Transform groundCheck;   //Ground check element which binds to the player.
+    public float checkRadius;       //Stores a reference to radius size value for the OverlapCirlce method. (Line::37)
+    public LayerMask whatIsGround;  //Stores a reference to what LayerMask value is considered ground. ("Ground" in this case)
 
-    int extraJumps;
-    public int extraJumpsValue;
+    Rigidbody2D rb;                 //Store a reference to the Rigidbody2D component required to use 2D Physics.
+
+    int extraJumps;                 //Store a reference to how many extra jumps a player can have.
+    public int extraJumpsValue;     //Public integer to assign the value of extraJumps during initalization.
 
     void Start()
     {
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour {
         if(isGrounded == true) {
             extraJumps = 2;
         }
+
         if(Input.GetKeyDown(KeyCode.UpArrow) && extraJumps > 0){
             rb.velocity = Vector2.up * jumpForce;
             extraJumps--;
