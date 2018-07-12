@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour {
     int extraJumps;                 //Store a reference to how many extra jumps a player can have.
     public int extraJumpsValue;     //Public integer to assign the value of extraJumps during initalization.
 
+    int coins = 0;
+
     void Start()
     {
         extraJumps = extraJumpsValue;
@@ -63,5 +65,14 @@ public class PlayerController : MonoBehaviour {
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Pickup") {
+            Destroy(collision.gameObject);
+            coins++;
+            Debug.Log(coins);
+        }
     }
 }
