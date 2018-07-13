@@ -51,10 +51,12 @@ public class PlayerController : MonoBehaviour {
             extraJumps = 2;
         }
 
-        if(Input.GetKeyDown(KeyCode.UpArrow) && extraJumps > 0){
+        bool jump = Input.GetButtonDown("Jump"); //Input.GetKeyDown(KeyCode.UpArrow)
+
+        if(jump && extraJumps > 0){
             rb.velocity = Vector2.up * jumpForce;
             extraJumps--;
-        } else if(Input.GetKeyDown(KeyCode.UpArrow) && extraJumps == 0 && isGrounded == true){
+        } else if(jump && extraJumps == 0 && isGrounded == true){
             rb.velocity = Vector2.up * jumpForce;
         }
     }
